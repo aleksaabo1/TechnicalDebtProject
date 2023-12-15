@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * ContactRegister class is used to store and manage contacts.
@@ -14,7 +15,6 @@ public class ContactRegister {
      * @param name  the name of the contact
      * @param phone the phone number of the contact
      * @param email the email of the contact
-     *
      */
     public void addContact(String name, String phone, String email) {
         Contact contact = new Contact(name, phone, email);
@@ -44,7 +44,7 @@ public class ContactRegister {
     }
 
     public void refreshDatabase() {
-        for(String key : register.keySet()) {
+        for (String key : register.keySet()) {
             System.out.println("-------------------------------------");
             System.out.println("Name: " + register.get(key).getName());
             System.out.println("Email: " + register.get(key).getEmail());
@@ -61,16 +61,58 @@ public class ContactRegister {
      * @return the found Contact, or null if not found
      */
     public Contact searchContact(String name) {
-        if (register.containsKey(name)) {
-            Contact contact = register.get(name);
-            // Replicating some logic from updateContact
-            System.out.println("Found Contact: " + contact);
-            return contact;
-        } else {
-            // Replicating logic from addContact
-            System.out.println("Contact not found.");
-            return null;
+        for (String key : register.keySet()) {
+            if (Objects.equals(key, name)) {
+                System.out.println("-------------------------------------");
+                System.out.println("Name: " + register.get(key).getName());
+                System.out.println("Email: " + register.get(key).getEmail());
+                System.out.println("Phone Number: " + register.get(key).getPhoneNumber());
+                System.out.println("-------------------------------------");
+                return register.get(key);
+            }
         }
+        return null;
+    }
+
+
+    /**
+     * Searches for a contact by name.
+     *
+     * @param phone the name of the contact
+     * @return the found Contact, or null if not found
+     */
+    public Contact searchNumber(String phone) {
+        for (String key : register.keySet()) {
+            if (Objects.equals(register.get(key).getPhoneNumber(), phone)) {
+                System.out.println("-------------------------------------");
+                System.out.println("Name: " + register.get(key).getName());
+                System.out.println("Email: " + register.get(key).getEmail());
+                System.out.println("Phone Number: " + register.get(key).getPhoneNumber());
+                System.out.println("-------------------------------------");
+                return register.get(key);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a contact by name.
+     *
+     * @param email the name of the contact
+     * @return the found Contact, or null if not found
+     */
+    public Contact searchMail(String email) {
+        for (String key : register.keySet()) {
+            if (Objects.equals(register.get(key).getEmail(), email)) {
+                System.out.println("-------------------------------------");
+                System.out.println("Name: " + register.get(key).getName());
+                System.out.println("Email: " + register.get(key).getEmail());
+                System.out.println("Phone Number: " + register.get(key).getPhoneNumber());
+                System.out.println("-------------------------------------");
+                return register.get(key);
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {
