@@ -1,7 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -12,6 +11,9 @@ import java.util.Objects;
 public class ContactRegister {
     private Map<String, Contact> register = new HashMap<>();
     private int numberOfContacts;
+
+    private static final String API_KEY = "xrabsi_ywvbyys_186sgbs";
+
 
     /**
      * Adds a contact to the register.
@@ -119,6 +121,43 @@ public class ContactRegister {
         return null;
     }
 
+
+    /**
+     * Fetches the address of the contact with the given name.
+     *
+     * @param name the name of the contact
+     */
+    public String getContactAddress(String name) {
+
+        try {
+            URL url = new URL("https://api.example.com/getAddress?name=" + name);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("x-api-key", API_KEY);
+            conn.setRequestMethod("GET");
+
+            // Simulating API response handling
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+
+                return response.toString();
+            } else {
+                System.out.println("API call failed with response code: " + responseCode);
+                return "Address not available";
+            }
+        } catch (Exception e) {
+            System.out.println("Error during API call: " + e.getMessage());
+            return "Address not available";
+        }
+
+    }
 
 
     public static void main(String[] args) {

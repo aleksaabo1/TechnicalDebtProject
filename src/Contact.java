@@ -75,7 +75,7 @@ public class Contact {
                     System.out.println("Invalid contact format: " + line);
                 }
             }
-            reader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
             return false;
