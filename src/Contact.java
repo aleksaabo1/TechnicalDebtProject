@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * This class represents a contact with a name and phone number.
  *
@@ -46,6 +51,36 @@ public class Contact {
         if (phoneNumber.matches("\\d{10}")){
             this.phoneNumber = phoneNumber;
         }
+    }
+
+    /**
+     * Reads the contacts from a file and adds them to the register.
+     * @return true if the file was read successfully, false otherwise
+     */
+    public boolean doAction() {
+        ContactRegister contactRegister = new ContactRegister();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String name = parts[0];
+                    String phone = parts[1];
+                    String email = parts[2];
+                    contactRegister.addContact(name, phone, email);
+                } else {
+
+                    System.out.println("Invalid contact format: " + line);
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 
