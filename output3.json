@@ -1,0 +1,227 @@
+[
+  {
+    "Location": "src/Contact.java",
+    'snippet_functionality': 'This code snippet defines a Contact class with name, email, and phone number attributes. It includes constructors, getters, and setters for these attributes, and a toString method for displaying the contact information.',
+    'number_of_lines': 43,
+    'securityDebts': [
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The setters for name and email do not validate the input, which can lead to securityvulnerabilities.',
+        'affected_area': 'setName and setEmail methods',
+        'affected_code': 'public void setName(String name) { this.name = name; } and public void setEmail(String email){ this.email=email;}'
+      },
+      {
+        'type': 'Insecure Default Settings',
+        'symptom': 'The default constructor sets a default name, email, and phone number, which can be a security risk if not properly managed.',
+        'affected_area': 'Contact default constructor',
+        'affected_code': 'public Contact() { this.name = "Default Name"; this.phoneNumber = "0000000000"; this.email = "example@mail.com"; }'
+      }
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Hard-coded Values',
+        'symptom': 'The default constructor has hard-coded values for name, email, and phone number.',
+        'affected_area': 'Contact default constructor',
+        'affected_code': 'public Contact() { this.name = "Default Name"; this.phoneNumber = "0000000000"; this.email = "example@mail.com"; }'
+      }
+    ]
+  },
+
+  {
+    "Location": "src/ContactRegister.java",
+    'snippet_functionality': 'This code snippet is a simple contact register application in Java. It allows for adding, updating, deleting, and searching contacts in a register. Each contact has a name, phone number, and email address.',
+    'number_of_lines': 63,
+    'securityDebts': [
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': "The code does not validate the input for the 'name' and 'email' parameters in the 'addContact' and 'updateContact' methods.",
+        'affected_area': 'addContact and updateContact methods',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}\npublic void updateContact(String name, String phone, String email) {...}'
+      },
+      {
+        'type': 'Insufficient Error Handling',
+        'symptom': 'The code does not handle the case where an invalid phone number is entered. It simply prints an error message and returns, potentially leaving the system in an inconsistent state.',
+        'affected_area': 'addContact method',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}'
+      }
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Code Duplication',
+        'symptom': "The code for creating a new Contact object and adding it to the register is duplicated in the 'addContact' and 'updateContact' methods.",
+        'affected_area': 'addContact and updateContact methods',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}\npublic void
+        updateContact(String name, String phone, String email){...}'
+      },
+      {
+        'type': 'Error/Exception Handling',
+        'symptom': 'The code does not throw or handle any exceptions. This can lead to unexpected behavior if an error occurs. ',
+        'affected_area': 'Entire code snippet',
+        'affected_code': 'Entire code snippet'
+      }
+    ]
+  },
+
+  {
+    "Location": "src/ContactRegister.java",
+    'snippet_functionality': 'This code snippet is a simple contact register. It allows for adding, updating, deleting, and searching contacts by name, phone number, or email.',
+    'number_of_lines': 97,
+    'securityDebts': [
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The code does not validate the input for the name and email fields when adding or updating a contact.',
+        'affected_area': 'addContact and updateContact methods',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}\npublic void updateContact(String name,String phone, String email){...}'}
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Code Duplication',
+        'symptom': "The code for printing a contact's details is duplicated in the searchContact, searchNumber, and searchMail methods.",
+        'affected_area': 'searchContact, searchNumber, searchMail methods',
+        'affected_code': 'public Contact searchContact(String name) {...}\npublic Contact searchNumber(String phone) {...}\npublic Contact searchMail(String email) {...}'
+      },
+      {
+        'type': 'Long Methods',
+        'symptom': 'The methods for searching a contact by name, phone number, or email are too long.',
+        'affected_area': 'searchContact, searchNumber, searchMail methods',
+        'affected_code': 'public Contact searchContact(String name) {...}\npublic Contact searchNumber(String phone) {...}\npublic Contact searchMail(String email) {...}'
+      }
+    ]
+  },
+
+
+  {
+    "Location": "src/Contact.java",
+    'snippet_functionality': 'This code snippet is a simple Java class for a Contact object with fields for name, email, and phone number. It includes methods for setting and getting these fields, and a method to read contacts from a file and add them to a register.',
+    'number_of_lines': 68,
+    'securityDebts': [
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The code does not validate the email input when creating a new Contact object or setting the email field.',
+        'affected_area': 'Contact constructor and setEmail method',
+        'affected_code': 'public Contact(String name, String email, String phone_number) {...}\npublic void setEmail(String email){...}'
+      },
+      {
+        'type': 'Insecure Default Settings',
+        'symptom': 'The default constructor sets a default email which could be a potential security risk.',
+        'affected_area': 'Default constructor',
+        'affected_code': 'public Contact() {...}'
+      },
+      {
+        'type': 'Insufficient Error Handling',
+        'symptom': "The doAction method catches an IOException but doesn't handle it in a meaningful way other than printing the stack trace.",
+        'affected_area': 'doAction method',
+        'affected_code': 'public boolean doAction() {...}'
+      }
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Error/Exception Handling',
+        'symptom': "The doAction method catches an IOException but doesn't handle it in a meaningful way other than printing the stack trace.",
+        'affected_area': 'doAction method',
+        'affected_code': 'public boolean doAction() {...}'
+      },
+      {
+        'type': 'Hard-coded Values',
+        'symptom': 'The default constructor sets hard-coded values for the name, email, and phone number fields.',
+        'affected_area': 'Default constructor',
+        'affected_code': 'public Contact() {...}'
+      }
+    ]
+  },
+
+  {
+    "Location": "src/ContactRegister.java",
+    'snippet_functionality': 'This code snippet is a simple contact register system in Java. It allows adding, updating, deleting, and searching contacts by name, phone number, or email.',
+    'number_of_lines': 97,
+    'securityDebts': [
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The code does not validate the input for name and email when adding or updating a contact.',
+        'affected_area': 'addContact and updateContact methods',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}\npublic void updateContact(String name, Stringphone, String email){...}'}
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Code Duplication',
+        'symptom': 'The code for printing contact details is duplicated in multiple methods.',
+        'affected_area': 'searchContact, searchNumber, searchMail methods',
+        'affected_code': 'public Contact searchContact(String name) {...}\npublic Contact searchNumber(String phone) {...}\npublic Contact searchMail(String email) {...}'
+      },
+      {
+        'type': 'Long Methods',
+        'symptom': 'The methods for searching contacts are too long and complex.',
+        'affected_area': 'searchContact, searchNumber, searchMail methods',
+        'affected_code': 'public Contact searchContact(String name) {...}\npublic Contact searchNumber(String phone) {...}\npublic Contact searchMail(String email) {...}'
+      }
+    ]
+  },
+
+  {
+    "Location": "src/Contact.java",
+    'snippet_functionality': 'This code snippet defines a Contact class in Java, which represents a contact with a name, email, and phone number. It also includes a method to read contacts from a file and add them to a register.',
+    'number_of_lines': 74,
+    'securityDebts': [
+      {
+        'type': 'Insecure Default Settings',
+        'symptom': 'Default values for name, email, and phone number are hard-coded into the Contact constructor.',
+        'affected_area': 'Contact constructor',
+        'affected_code': 'public Contact() {\n        this.name = "Default Name";\n        this.phoneNumber ="0000000000";\n        this.email = "example@mail.com";\n    }'
+      },
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The code does not validate the email input.',
+        'affected_area': 'Contact constructor and setEmail method',
+        'affected_code': 'public Contact(String name, String email, String phone_number) {\n        this.name =name;\n        this.email = email;\n        if (phone_number.matches("\\\\d{10}")){\n            this.phoneNumber =phone_number;\n        }\n    }\n\n    public void setEmail(String email){\n        this.email = email;\n    }'
+      }
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Error/Exception Handling',
+        'symptom': 'The code does not handle the FileNotFoundException, which might be thrown when trying to open the file.',
+        'affected_area': 'doAction method',
+        'affected_code': 'public boolean doAction() {\n        ContactRegister contactRegister = new ContactRegister();\n        try {\n            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));\n            String line;\n\n            while ((line = reader.readLine()) != null) {\n String[] parts = line.split(",");\n                if (parts.length == 3) {\n                    String name = parts[0];\n                    String phone = parts[1];\n                    String email = parts[2];\n contactRegister.addContact(name, phone, email);\n                } else {\n\n System.out.println("Invalid contact format: " + line);\n                }\n            }\n\n        } catch(IOException e) {\n            e.printStackTrace();\n            return false;\n        }\n        return true;\n}'
+      },
+      {
+        'type': 'Hard-coded Values',
+        'symptom': "The file name 'input.txt' is hard-coded into the doAction method.",
+        'affected_area': 'doAction method',
+        'affected_code': 'BufferedReader reader = new BufferedReader(new FileReader("input.txt"));'
+      }
+    ]
+  },
+
+  {
+    "Location": "src/ContactRegister.java",
+    'snippet_functionality': 'The code snippet is a simple contact register application in Java. It allows for adding, updating, deleting, and searching contacts by name, phone number, or email. It also fetches the address of a contact from an external API using a hardcoded API key.',
+    'number_of_lines': 141,
+    'securityDebts': [
+      {
+        'type': 'Hardcoded Secrets',
+        'symptom': 'API key is hardcoded in the application code.',
+        'affected_area': 'ContactRegister class',
+        'affected_code': 'private static final String API_KEY = "xrabsi_ywvbyys_186sgbs";'
+      },
+      {
+        'type': 'Lack of Input Validation',
+        'symptom': 'The code does not validate the email input when adding or updating a contact.',
+        'affected_area': 'addContact and updateContact methods',
+        'affected_code': 'public void addContact(String name, String phone, String email) {...}\npublic void updateContact(String name, String phone, String email) {...}'
+      }
+    ],
+    'technicalDebts': [
+      {
+        'type': 'Code Duplication',
+        'symptom': 'Code for printing contact details is duplicated in multiple methods.',
+        'affected_area': 'refreshDatabase, searchContact, searchNumber, and searchMail methods',
+        'affected_code': 'System.out.println("-------------------------------------");\nSystem.out.println("Name: " + register.get(key).getName());\nSystem.out.println("Email: " + register.get(key).getEmail());\nSystem.out.println("Phone Number: " + register.get(key).getPhoneNumber());\nSystem.out.println("-------------------------------------");'
+      },
+      {
+        'type': 'Error/Exception Handling',
+        'symptom': 'The code does not handle exceptions properly in the getContactAddress method.',
+        'affected_area': 'getContactAddress method',
+        'affected_code': 'catch (Exception e) {\nSystem.out.println("Error during API call: " + e.getMessage());\nreturn "Address not available";\n}'
+      }
+    ]
+  }
+]

@@ -22,9 +22,7 @@ public class Contact {
     public Contact(String name, String email, String phone_number) {
         this.name = name;
         this.email = email;
-        if (phone_number.matches("\\d{10}")){
-            this.phoneNumber = phone_number;
-        }
+        this.phoneNumber = phone_number;
     }
 
     public String getName() {
@@ -48,9 +46,7 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber){
-        if (phoneNumber.matches("\\d{10}")){
-            this.phoneNumber = phoneNumber;
-        }
+        this.phoneNumber = phoneNumber;
     }
 
     /**
